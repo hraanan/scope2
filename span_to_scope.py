@@ -10,7 +10,7 @@ Created on Tue Aug 14 12:25:43 2018
 from find_main_chain_of_microen import get_main_chain
 # create proteins and microenvironments lists
 
-out_file=open('F:\scope2\microenvironments_scope_test.txt','w')
+out_file=open('F:\scope2\microenvironments_scope_including_partoverlap.txt','w')
 out_file.write('id\tscope\n')
 microen_file=open('f:\Dropbox\postdoc\Results\Organic_cofactors\merge_metal_organic_chl_ca_10_md_3_rmsd_5_factor_correct_EC_1.4_1.3_1.15_no_ADE.txt','r')
 microen_file.readline()
@@ -90,31 +90,35 @@ for line in scope_file:
             print(microen,main_chain)
         '''
         if main_chain[0]==True:
-            continue
+           continue
         if main_chain[1]=='err':
             continue
 #        if start_res<0 or end_res<0:
 #            continue       
         #try:
         #print(start_res,end_res)
-        if domain_residues=='all':
-            full_overlap=full_overlap+1
-            out_file.write('_'.join(microen)+'\t'+line[3]+'\n')
-#            print(line)
-#            print('_'.join(microen)+'\t'+line[3]+'\n')
-            continue
-            
-        else:    
-            if int(start_res)<=main_chain[2][0] and int(end_res)>=main_chain[2][1]:
+        if main_chain[0]==False:
+            if domain_residues=='all':
                 full_overlap=full_overlap+1
                 out_file.write('_'.join(microen)+'\t'+line[3]+'\n')
-#                print(line)
-#                print('_'.join(microen)+'\t'+line[3]+'\n')
+    #            print(line)
+    #            print('_'.join(microen)+'\t'+line[3]+'\n')
                 continue
-            elif int(start_res)>main_chain[2][0] and int(end_res)>main_chain[2][1]:
-                part_overlap=part_overlap+1
-            elif int(start_res)<main_chain[2][0] and int(end_res)<main_chain[2][1]:
-                part_overlap=part_overlap+1
+                
+            else:    
+                if int(start_res)<=main_chain[2][0] and int(end_res)>=main_chain[2][1]:
+                    full_overlap=full_overlap+1
+                    out_file.write('_'.join(microen)+'\t'+line[3]+'\n')
+    #                print(line)
+    #                print('_'.join(microen)+'\t'+line[3]+'\n')
+                    continue
+                elif int(start_res)>main_chain[2][0] and int(end_res)>main_chain[2][1]:
+                    part_overlap=part_overlap+1
+                    out_file.write('_'.join(microen)+'\t'+line[3]+'\n')
+                elif int(start_res)<main_chain[2][0] and int(end_res)<main_chain[2][1]:
+                    part_overlap=part_overlap+1
+                    out_file.write('_'.join(microen)+'\t'+line[3]+'\n')
+        #if main_chain[0]==True:
         #except:
             
             

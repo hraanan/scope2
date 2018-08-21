@@ -10,7 +10,7 @@ Created on Fri Aug 17 11:43:37 2018
 #
 #G=nx.Graph()
 
-out_file=open('f:/scope2/groups_scope_ditances.txt','w')
+out_file=open('f:/scope2/groups_scope_ditances_matrix.txt','w')
 out_file.write('source\ttarget\tdistance\n')
 in_file=open('f:/scope2/groups_scope.txt','r')
 in_file.readline()
